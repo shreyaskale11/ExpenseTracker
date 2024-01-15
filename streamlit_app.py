@@ -1,6 +1,7 @@
 
 
 import streamlit as st
+
 from datetime import datetime
 import firebase_admin
 from firebase_admin import credentials
@@ -124,7 +125,8 @@ def main():
         up_date = up_date.strftime("%Y-%m-%d")
 
         # Perform a query to retrieve expenses not settled in the last month
-        query = coll_ref_1.where("date", ">=", l_date).where("date", "<=", up_date,use_field_for_ops=True)
+        coll_ref_2 = coll_ref_1.where("date", "<=", up_date)
+        query = coll_ref_2.where("date", ">=", l_date)
         expenses_not_settled = query.stream()
 
         p1,p2,p3,p4,p5,p6 = 0,0,0,0,0,0
@@ -154,15 +156,8 @@ def main():
     
     
     
-    
-    
-    
-    
-
-
-
-
-main()
+if __name__ == "__main__":
+    main()
 
 
 
