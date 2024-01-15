@@ -125,8 +125,8 @@ def main():
         up_date = up_date.strftime("%Y-%m-%d")
 
         # Perform a query to retrieve expenses not settled in the last month
-        coll_ref_2 = coll_ref_1.where("date", "<=", up_date)
-        query = coll_ref_2.where("date", ">=", l_date)
+        coll_ref_2 = coll_ref_1.where(filter=firestore.FieldFilter("date", "<=", up_date))
+        query = coll_ref_2.where(filter=firestore.FieldFilter("date", ">=", l_date))
         expenses_not_settled = query.stream()
 
         p1,p2,p3,p4,p5,p6 = 0,0,0,0,0,0
