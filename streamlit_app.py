@@ -97,9 +97,6 @@ def main():
         person6_settled = st.checkbox(f"Settled",key="person6_settled",value=(d["p6_settled"] if d else False))
 
     # Rest of the code remains the same
-    st.write("---")
-    
-
 
     if st.button("Save Expenses"):
         coll_ref_1.document(today_date.strftime("%Y-%m-%d")).set({
