@@ -1,12 +1,10 @@
 
 
 import streamlit as st
-import os
-from datetime import datetime, timedelta
+from datetime import datetime
 import firebase_admin
-from firebase_admin import credentials,db
+from firebase_admin import credentials
 from firebase_admin import firestore
-from firebase_admin import auth
 
 # Assuming you have already set the secrets in Streamlit using st.secrets["your_secret_name"]
 service_account_type = st.secrets["type"]
@@ -126,7 +124,7 @@ def main():
         up_date = up_date.strftime("%Y-%m-%d")
 
         # Perform a query to retrieve expenses not settled in the last month
-        query = coll_ref_1.where("date", ">=", l_date).where("date", "<=", up_date)
+        query = coll_ref_1.where("date", ">=", l_date).where("date", "<=", up_date,use_field_for_ops=True)
         expenses_not_settled = query.stream()
 
         p1,p2,p3,p4,p5,p6 = 0,0,0,0,0,0
